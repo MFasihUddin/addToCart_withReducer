@@ -1,44 +1,16 @@
+export const defaultVal = {
+  warning: false,
+};
 
-const cartReducer = (state,action)=>{
-switch (aaction.type) {
+export const cartReducer = (cart, action) => {
+  switch (action.type) {
     case "ADD_ITEM":
-        return (item) => {
-            let isPresent = false;
-            cart.forEach((product) => {
-              if (item.id === product.id) {
-                isPresent = true;
-              }
-            });
-        
-            if (isPresent) {
-              setWarning(true);
-              setTimeout(() => {
-                setWarning(false);
-              }, 2000);
-              return;
-            }
-            setCart([...cart, item]);
-          }
-
+      return [...cart, action.payload];
+    case "REMOVE":
+      return cart.filter((item) => item.id !== action.id);
     default:
-        break;
-}
-}
+      return cart;
+  }
+};
 
-handleClick: (item) => {
-    let isPresent = false;
-    cart.forEach((product) => {
-      if (item.id === product.id) {
-        isPresent = true;
-      }
-    });
 
-    if (isPresent) {
-      setWarning(true);
-      setTimeout(() => {
-        setWarning(false);
-      }, 2000);
-      return;
-    }
-    setCart([...cart, item]);
-  },

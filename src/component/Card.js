@@ -4,7 +4,7 @@ import { CartContext } from "../context/CartProvider";
 
 function Card({ item }) {
   const { title, author, price, img } = item;
-  const { handleClick } = useContext(CartContext);
+  const { dispatch } = useContext(CartContext);
   return (
     <div className="cards">
       <div className="image-box">
@@ -14,7 +14,9 @@ function Card({ item }) {
         <p>{title}</p>
         <p>{author}</p>
         <p>Price-{price}</p>
-        <button onClick={() => handleClick(item)}>Add to Cart</button>
+        <button onClick={() => dispatch({ type: "ADD_ITEM", payload: item })}>
+          Add to Cart
+        </button>
       </div>
     </div>
   );

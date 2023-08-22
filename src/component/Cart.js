@@ -43,10 +43,10 @@ function Cart() {
     // setCart([...tempArr]);
   };
 
-  const handleRemove = (id) => {
-    const remainingArr = cart.filter((item) => item.id !== id);
-    // setCart(remainingArr);
-  };
+  // const handleRemove = (id) => {
+  //   const remainingArr = cart.filter((item) => item.id !== id);
+  //   setCart(remainingArr);
+  // };
 
   useEffect(() => {
     handlePrice();
