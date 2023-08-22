@@ -4,8 +4,7 @@ import { CartContext } from "../context/CartProvider";
 
 function Cart() {
   const [price, setPrice] = useState(0);
-  const { cart, setCart, handleChange } = useContext(CartContext);
-
+  const { cart, dispatch } = useContext(CartContext);
 
   const handlePrice = () => {
     let ans = 0;
@@ -15,10 +14,40 @@ function Cart() {
     setPrice(ans);
   };
 
+  // const handleClick = (item) => {
+  //   let isPresent = false;
+  //   cart.forEach((product) => {
+  //     if (item.id === product.id) {
+  //       isPresent = true;
+  //     }
+  //   });
+  //   if (isPresent) {
+  //     setWarning(true);
+  //     setTimeout(() => {
+  //       setWarning(false);
+  //     }, 2000);
+  //     return;
+  //   }
+  //   setCart([...cart, item]);
+  // };
+
+  const handleChange = (item, d) => {
+    let ind = -1;
+    cart.forEach((data, index) => {
+      if (data.id === item.id) ind = index;
+    });
+    const tempArr = cart;
+    tempArr[ind].amount += d;
+
+    if (tempArr[ind].amount === 0) tempArr[ind].amount = 1;
+    // setCart([...tempArr]);
+  };
+
   const handleRemove = (id) => {
     const remainingArr = cart.filter((item) => item.id !== id);
-    setCart(remainingArr);
+    // setCart(remainingArr);
   };
+
   useEffect(() => {
     handlePrice();
   });
@@ -37,7 +66,9 @@ function Cart() {
           </div>
           <div>
             <span>{item.price}</span>
-            <button onClick={() => handleRemove(item.id)}>Remove</button>
+            <button onClick={() => dispatch({ type: "REMOVE", id: item.id })}>
+              Remove
+            </button>
           </div>
         </div>
       ))}

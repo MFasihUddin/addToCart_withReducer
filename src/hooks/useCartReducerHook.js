@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 
-export const useCartHook = (initialVal) => {
-  const [cart, setCart] = useState(initialVal);
+export const useCartReducerHook = (initialVal, cartReducer) => {
+  const [cart, setCart] = useReducer(cartReducer, initialVal);
   const [warning, setWarning] = useState(false);
   return {
     cart,
