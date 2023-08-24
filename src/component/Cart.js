@@ -22,13 +22,8 @@ function Cart() {
     tempArr[ind].amount += d;
 
     if (tempArr[ind].amount === 0) tempArr[ind].amount = 1;
-    // const arr = tempArr;
-    // console.log(arr)
-    // const arr1 = [...tempArr]
-    // console.log(arr1)
 
     dispatch({ type: "AMOUNT", payload: tempArr });
-    // setCart([...tempArr]);
   };
 
   // useEffect(() => {
