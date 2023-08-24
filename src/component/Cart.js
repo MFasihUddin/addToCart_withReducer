@@ -13,17 +13,23 @@ function Cart() {
   //   setPrice(ans);
   // };
 
-  // const handleChange = (item, d) => {
-  //   let ind = -1;
-  //   cart.forEach((data, index) => {
-  //     if (data.id === item.id) ind = index;
-  //   });
-  //   const tempArr = cart;
-  //   tempArr[ind].amount += d;
+  const handleChange = (item, d) => {
+    let ind = -1;
+    state.cart.forEach((data, index) => {
+      if (data.id === item.id) ind = index;
+    });
+    const tempArr = state.cart;
+    tempArr[ind].amount += d;
 
-  //   if (tempArr[ind].amount === 0) tempArr[ind].amount = 1;
-  //   setCart([...tempArr]);
-  // };
+    if (tempArr[ind].amount === 0) tempArr[ind].amount = 1;
+    // const arr = tempArr;
+    // console.log(arr)
+    // const arr1 = [...tempArr]
+    // console.log(arr1)
+
+    dispatch({ type: "AMOUNT", payload: tempArr });
+    // setCart([...tempArr]);
+  };
 
   // useEffect(() => {
   //   handlePrice();
@@ -36,11 +42,11 @@ function Cart() {
             <img src={item.img} alt={item.title} />
             <p>{item.title}</p>
           </div>
-          {/* <div>
+          <div>
             <button onClick={() => handleChange(item, -1)}>-</button>
             <button>{item.amount}</button>
             <button onClick={() => handleChange(item, +1)}>+</button>
-          </div> */}
+          </div>
           <div>
             <span>{item.price}</span>
             <button onClick={() => dispatch({ type: "REMOVE", id: item.id })}>
