@@ -4,7 +4,25 @@ import { CartContext } from "../context/CartProvider";
 
 function Card({ item }) {
   const { title, author, price, img } = item;
-  const { dispatch } = useContext(CartContext);
+  const { state, dispatch } = useContext(CartContext);
+
+  const handleClick = (item) => {
+    let isPresent = false;
+    state.cart.forEach((product) => {
+      if (item.id === product.id) {
+        isPresent = true;
+      }
+    });
+    if (isPresent) {
+      dispatch({ type: "WARNING", payload: true });
+      setTimeout(() => {
+        dispatch({ type: "WARNING", payload: false });
+      }, 2000);
+      return;
+    }
+    dispatch({ type: "ADD_ITEM", payload: item });
+  };
+
   return (
     <div className="cards">
       <div className="image-box">
@@ -14,9 +32,7 @@ function Card({ item }) {
         <p>{title}</p>
         <p>{author}</p>
         <p>Price-{price}</p>
-        <button onClick={() => dispatch({ type: "ADD_ITEM", payload: item })}>
-          Add to Cart
-        </button>
+        <button onClick={() => handleClick(item)}>Add to Cart</button>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { ShowContext } from "../context/CartProvider";
 import { CartContext } from "../context/CartProvider";
 
 function Navbar() {
-  const { cart } = useContext(CartContext);
+  const { state } = useContext(CartContext);
   const { shopToggle, cartToggle } = useContext(ShowContext);
   return (
     <nav>
@@ -16,7 +16,7 @@ function Navbar() {
           <span>
             <i className="fas fa-cart-plus"></i>
           </span>
-          <span>{cart.length}</span>
+          <span>{state.cart.length}</span>
         </div>
       </div>
     </nav>

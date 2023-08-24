@@ -1,21 +1,17 @@
-import React, { createContext } from "react";
+import React, { createContext, useReducer } from "react";
 import useToggle from "../hooks/useToggle";
-import { useCartReducerHook } from "../hooks/useCartReducerHook";
-import { cartReducer } from "../reducer/cartReducer";
+import { initialVal, cartReducer } from "../reducer/cartReducer";
 
 export const ShowContext = createContext();
 export const CartContext = createContext();
 
-const initialVal = []
-
-function CartProvider(props) {
+function CartProvider({ children }) {
   const [show, shopToggle, cartToggle] = useToggle(true);
-  const { cart, dispatch } = useCartReducerHook(initialVal, cartReducer);
-  console.log(cart)
+  const [state, dispatch] = useReducer(cartReducer, initialVal);
   return (
     <ShowContext.Provider value={{ show, shopToggle, cartToggle }}>
-      <CartContext.Provider value={{ cart, dispatch }}>
-        {props.children}
+      <CartContext.Provider value={{ state, dispatch }}>
+        {children}
       </CartContext.Provider>
     </ShowContext.Provider>
   );

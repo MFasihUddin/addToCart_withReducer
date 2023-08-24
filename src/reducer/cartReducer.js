@@ -1,16 +1,26 @@
-export const defaultVal = {
+export const initialVal = {
+  cart: [],
   warning: false,
 };
 
-export const cartReducer = (cart, action) => {
+export const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM":
-      return [...cart, action.payload];
+      return {
+        ...state,
+        cart: [...state.cart, action.payload],
+      };
+    case "WARNING":
+      return {
+        ...state,
+        warning: action.payload,
+      };
     case "REMOVE":
-      return cart.filter((item) => item.id !== action.id);
+      return {
+        ...state,
+        cart: state.cart.filter((item) => item.id !== action.id),
+      };
     default:
-      return cart;
+      return state;
   }
 };
-
-
