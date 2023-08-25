@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import "../styles/Card.css";
 import { CartContext } from "../context/CartProvider";
+import { DispatchContext } from "../context/CartProvider";
 
 function Card({ item }) {
   const { title, author, price, img } = item;
-  const { state, dispatch } = useContext(CartContext);
+  const state = useContext(CartContext);
+  const dispatch = useContext(DispatchContext);
 
   const handleClick = (item) => {
     let isPresent = false;

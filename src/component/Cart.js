@@ -1,17 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
 import "../styles/Cart.css";
 import { CartContext } from "../context/CartProvider";
+import { DispatchContext } from "../context/CartProvider";
 
 function Cart() {
   const [price, setPrice] = useState(0);
-  const { state, dispatch } = useContext(CartContext);
-  // const handlePrice = () => {
-  //   let ans = 0;
-  //   cart.map((item) => {
-  //     return (ans += item.amount * item.price);
-  //   });
-  //   setPrice(ans);
-  // };
+  const state = useContext(CartContext);
+  const dispatch = useContext(DispatchContext);
+
+  const handlePrice = () => {
+    let ans = 0;
+    state.cart.map((item) => {
+      return (ans += item.amount * item.price);
+    });
+    setPrice(ans);
+  };
 
   const handleChange = (item, d) => {
     let ind = -1;
@@ -26,9 +29,9 @@ function Cart() {
     dispatch({ type: "AMOUNT", payload: tempArr });
   };
 
-  // useEffect(() => {
-  //   handlePrice();
-  // });
+  useEffect(() => {
+    handlePrice();
+  });
   return (
     <article>
       {state.cart.map((item) => (

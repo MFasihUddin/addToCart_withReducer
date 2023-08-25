@@ -7,7 +7,7 @@ import { CartContext } from "../context/CartProvider";
 
 function HomePage() {
   const { show } = useContext(ShowContext);
-  const { state } = useContext(CartContext);
+  const state = useContext(CartContext);
   return (
     <Fragment>
       <Navbar />

@@ -4,7 +4,7 @@ import { ShowContext } from "../context/CartProvider";
 import { CartContext } from "../context/CartProvider";
 
 function Navbar() {
-  const { state } = useContext(CartContext);
+  const state = useContext(CartContext);
   const { shopToggle, cartToggle } = useContext(ShowContext);
   return (
     <nav>
